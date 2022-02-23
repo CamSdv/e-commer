@@ -1,0 +1,68 @@
+<img
+  src="../../../assets/banner1.png"
+  alt="Los Angeles"
+  class="d-block"
+  style="width: 100%"
+/>
+
+<section class="mb-5">
+  <div class="top">
+    <div class="section-header">
+      <h2>Productos disponibles</h2>
+    </div>
+
+    <div class="flex-container">
+      <div class="card" *ngFor="let item of productos">
+        <img
+          [src]="item.Img"
+          class="card-img-top rounded mx-auto d-block"
+          alt="..."
+        />
+        <h3 class="ms-2 mt-2">${{ item.Precio | number:'1.0-2'  }}</h3>
+        <div class="card-body">
+          <h5 class="card-title">{{ item.Producto }}</h5>
+          <div class="d-flex justify-content-end">
+            <button
+              *ngIf="!mostrarDescripcion"
+              (click)="habilitarDescripcion(item)"
+              class="btn btn-defaul btn-circle position-relative"
+            >
+              <i class="fa fa-angle-down"></i>
+            </button>
+            <button
+              *ngIf="mostrarDescripcion"
+              (click)="habilitarDescripcion(item)"
+              class="btn btn-defaul btn-circle position-relative"
+            >
+              <i class="fa fa-angle-up"></i>
+            </button>
+          </div>
+          <p *ngIf="mostrarDescripcion">{{ item.Descripcion }}</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-end m-3">
+          <button
+            type="button"
+            (click)="agregarCarrito(item)"
+            class="btn btn-outline-info btn-circle position-relative"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#card-shopping"
+            [disabled]="item.Stock === 0"
+          >
+            <i class="fa fa-plus"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              {{ item.Stock }}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="offcanvas offcanvas-end" id="card-shopping">
+        <app-card ></app-card>
+      </div>
+
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,32 @@
+<div class="offcanvas-header">
+  <h1 class="offcanvas-title">Pedido</h1>
+  <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+</div>
+<div class="offcanvas-body">
+  <ul class="list-group list-group-flush">
+    <li *ngFor="let producto of listaProductos" class="list-group-item">
+      <div class="row no-gutters">
+        <div class="col-sm-3">
+          <img
+            [src]="producto?.data?.Img"
+            class="card-img-top rounded mx-auto d-block"
+            alt="..."
+          />
+        </div>
+        <div class="col-sm-5">
+          <div class="card-body">
+              <h4>{{producto?.data?.Producto}}</h4>
+          </div>
+        </div>
+        <div class="col-sm-4 position-absolute bottom-0 end-0">
+          <h3 >${{ producto?.data?.Precio | number:'1.0-2'  }}</h3>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="card-body">
+      <h3 class="end-0">Total a pagar: ${{suma | number:'1.0-2' }}</h3>
+  </div>
+  <button class="btn btn-secondary position-absolute bottom-0 end-0" data-bs-dismiss="offcanvas" (click)="comprar()">Comprar</button>
+
+</div>
